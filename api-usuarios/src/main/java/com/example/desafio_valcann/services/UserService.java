@@ -45,4 +45,9 @@ public class UserService {
         PaginationInfo pagination = new PaginationInfo(page, size, totalItems, totalPages);
         return new UserPage(pagedUsers, pagination);
     }
+
+    public UserDto findUserById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getRole(), user.getActive(), user.getCreatedAt());
+    }
 }

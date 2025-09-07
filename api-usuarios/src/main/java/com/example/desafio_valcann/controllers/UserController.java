@@ -4,10 +4,7 @@ import com.example.desafio_valcann.dtos.UserDto;
 import com.example.desafio_valcann.dtos.UserPage;
 import com.example.desafio_valcann.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("users")
@@ -30,4 +27,9 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<UserDto> findUserById(@PathVariable Long id){
+        UserDto user = userService.findUserById(id);
+        return ResponseEntity.ok(user);
+    }
 }
