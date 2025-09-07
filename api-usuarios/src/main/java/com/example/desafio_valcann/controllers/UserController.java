@@ -1,5 +1,6 @@
 package com.example.desafio_valcann.controllers;
 
+import com.example.desafio_valcann.dtos.UserDto;
 import com.example.desafio_valcann.dtos.UserPage;
 import com.example.desafio_valcann.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -28,4 +29,5 @@ public class UserController {
         UserPage response = userService.findAllUsers(page, pageSize, q, role, is_active);
         return ResponseEntity.ok(response);
     }
+
 }

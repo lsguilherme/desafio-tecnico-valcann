@@ -1,6 +1,7 @@
 package com.example.desafio_valcann.services;
 
 import com.example.desafio_valcann.dtos.PaginationInfo;
+import com.example.desafio_valcann.dtos.UserDto;
 import com.example.desafio_valcann.dtos.UserPage;
 import com.example.desafio_valcann.models.User;
 import com.example.desafio_valcann.repositories.UserRepository;
@@ -30,9 +31,12 @@ public class UserService {
         int startIndex = (page - 1) * size;
         int endIndex = Math.min(startIndex + size, filteredUsers.size());
 
-        List<User> pagedUsers = List.of();
+        List<UserDto> pagedUsers = List.of();
         if (startIndex < endIndex) {
-            pagedUsers = filteredUsers.subList(startIndex, endIndex);
+            pagedUsers = filteredUsers.subList(startIndex, endIndex)
+                    .stream()
+                    .map(u -> new UserDto(u.getId(), u.getName(), u.getEmail(), u.getRole(), u.getActive(), u.getCreatedAt()))
+                    .toList();
         }
 
         long totalItems = filteredUsers.size();
