@@ -53,6 +53,12 @@ class UserServiceTest {
         assertEquals("joao@email.com", result.email());
     }
 
+    @Test
+    @DisplayName("Deve retornar exceção quando usuário ID não existir")
+    void getUserById_WhenUserNotExists_ShouldThrowException(){
+        when(userRepository.findById(999L)).thenReturn(Optional.empty());
 
+        assertThrows(UserNotFoundException.class, () -> userService.findUserById(999L));
+    }
 
 }
