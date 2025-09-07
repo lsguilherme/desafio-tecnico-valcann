@@ -30,4 +30,7 @@ public class UserRepository {
     }
 
 
+    public List<User> findAll() {
+        return users;
+    }
 }
