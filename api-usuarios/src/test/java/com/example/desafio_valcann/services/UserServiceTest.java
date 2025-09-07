@@ -62,7 +62,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar usuários páginados quando buscar todos usuários")
+    @DisplayName("Deve retornar usuários paginados quando buscar todos usuários")
     void getAllUsers_ShouldReturnPaginatedUsers(){
         when(userRepository.findAll()).thenReturn(List.of(user));
 
@@ -73,5 +73,16 @@ class UserServiceTest {
         assertEquals(1, result.pagination().page());
         assertEquals(10, result.pagination().pageSize());
         assertEquals(1, result.pagination().totalItems());
+    }
+
+    @Test
+    @DisplayName("Deve retornar usuários paginados quando usar parâmetro de busca")
+    void getAllUsers_WhitQueryFilter_ShouldReturnPaginatedUsers(){
+        when(userRepository.findAll()).thenReturn(List.of(user));
+
+        UserPage result = userService.findAllUsers(1, 10, "joão", null, null);
+
+        assertEquals(1, result.data().size());
+        assertEquals("João Silva", result.data().getFirst().name());
     }
 }
