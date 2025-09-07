@@ -76,4 +76,15 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                ", isActive=" + isActive +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
