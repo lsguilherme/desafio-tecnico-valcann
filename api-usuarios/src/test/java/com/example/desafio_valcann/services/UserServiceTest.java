@@ -61,4 +61,17 @@ class UserServiceTest {
         assertThrows(UserNotFoundException.class, () -> userService.findUserById(999L));
     }
 
+    @Test
+    @DisplayName("Deve retornar usuários páginados quando buscar todos usuários")
+    void getAllUsers_ShouldReturnPaginatedUsers(){
+        when(userRepository.findAll()).thenReturn(List.of(user));
+
+        UserPage result = userService.findAllUsers(1, 10, null, null, null);
+
+        assertNotNull(result);
+        assertEquals(1, result.data().size());
+        assertEquals(1, result.pagination().page());
+        assertEquals(10, result.pagination().pageSize());
+        assertEquals(1, result.pagination().totalItems());
+    }
 }
