@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public UserPage findAllUsers(int page, int pageSize, String q, String role, Boolean isActive) {
-        logger.info("Buscando usuários - Página: {}, Tamanho: {}, Filtros: [Query: {}, Role: {}, isActive: {}]", page, pageSize, q, role, isActive);
+        logger.info("Searching users - Page: {}, Size: {}, Filters: [Query: {}, Role: {}, isActive: {}]", page, pageSize, q, role, isActive);
         
         List<User> filteredUsers = userRepository.findAll().stream()
                 .filter(u -> q==null || q.isBlank() || u.getName().toLowerCase().contains(q.toLowerCase()) ||
@@ -49,14 +49,14 @@ public class UserService {
         long totalPages = (long) Math.ceil((double) totalItems / size);
 
         PaginationInfo pagination = new PaginationInfo(page, size, totalItems, totalPages);
-        logger.info("Retornando {} usuários de {} total", pagedUsers.size(), totalItems);
+        logger.info("Returning {} users of {} total", pagedUsers.size(), totalItems);
         return new UserPage(pagedUsers, pagination);
     }
 
     public UserDto findUserById(Long id) {
-        logger.info("Buscando usuário por ID: {}", id);
+        logger.info("Searching user by ID: {}", id);
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com ID: " + id));
-        logger.info("Usuário encontrado: {}", user);
+        logger.info("User found: {}", user.getName());
         return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getRole(), user.getActive(), user.getCreatedAt());
     }
 }
