@@ -3,6 +3,7 @@ package com.example.desafio_valcann.services;
 import com.example.desafio_valcann.dtos.PaginationInfo;
 import com.example.desafio_valcann.dtos.UserDto;
 import com.example.desafio_valcann.dtos.UserPage;
+import com.example.desafio_valcann.exceptions.UserNotFoundException;
 import com.example.desafio_valcann.models.User;
 import com.example.desafio_valcann.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class UserService {
     }
 
     public UserDto findUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com ID: " + id));
         return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getRole(), user.getActive(), user.getCreatedAt());
     }
 }
