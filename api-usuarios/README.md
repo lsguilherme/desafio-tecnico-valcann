@@ -14,12 +14,17 @@ API REST para busca de usuários com paginação e filtros.
 ### Pré-requisitos
 - Docker
 - Ou Java e Maven (para execução local)
-### Docker
+- Git
+
+#### Clone do projeto
 ```bash
 # Clone o repositório
 git clone https://github.com/lsguilherme/desafio-tecnico-valcann.git
 cd api-usuarios
+```
 
+#### Docker
+```bash
 # Build e execução
 docker build -t users-api .
 docker run --rm -p 8080:8080 users-api
@@ -80,6 +85,6 @@ curl "http://localhost:8080/api/v1/users/999"
 ## 🧪 Testes
 
 ```bash
-# Executar testes unitários
+# Executar testes unitários (necessita java e maven localmente)
 ./mvnw test
 ```
