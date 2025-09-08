@@ -1,4 +1,4 @@
-# Users Management API
+# Users API
 
 API REST para busca de usuários com paginação e filtros.
 
